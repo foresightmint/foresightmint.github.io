@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Risk Radar — Power BI Starter Pack · ForesightMint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1B3A5C;
+  --navy-light: #234870;
+  --cyan: #22D3EE;
+  --cyan-dark: #0096B7;
+  --amber: #F59E0B;
+  --ice: #F1F5F9;
+  --red: #EF4444;
+  --green: #10B981;
+  --white: #FFFFFF;
+  --text-dark: #0F1E2E;
+  --text-muted: #64748B;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; color: var(--text-dark); background: var(--white); }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.25rem 4rem;
+  background: rgba(27,58,92,0.97); backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(34,211,238,0.15);
+}
+.nav-logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+.nav-logo-mark {
+  width: 32px; height: 32px; background: var(--cyan); border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--navy);
+}
+.nav-logo-text { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--white); }
+.nav-logo-text span { color: var(--cyan); }
+.nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+.nav-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--cyan); }
+.nav-cta {
+  background: var(--cyan); color: var(--navy) !important;
+  padding: 0.5rem 1.25rem; border-radius: 6px; font-weight: 600 !important;
+}
+
+/* HERO */
+.hero {
+  padding: 9rem 4rem 6rem;
+  background: var(--navy);
+  position: relative; overflow: hidden;
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(34,211,238,0.05) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(34,211,238,0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.hero-glow {
+  position: absolute; top: -150px; right: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(34,211,238,0.1) 0%, transparent 70%);
+}
+
+.breadcrumb {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.85rem; color: rgba(255,255,255,0.4);
+  margin-bottom: 2rem;
+}
+.breadcrumb a { color: rgba(255,255,255,0.4); text-decoration: none; }
+.breadcrumb a:hover { color: var(--cyan); }
+.breadcrumb span { color: rgba(255,255,255,0.2); }
+
+.hero-layout {
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: 1fr 400px; gap: 4rem; align-items: start;
+}
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.4);
+  color: var(--amber); padding: 0.35rem 0.85rem; border-radius: 100px;
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: 1.5rem; animation: fadeUp 0.5s ease both;
+}
+
+.hero-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.5rem, 4vw, 3.5rem); color: var(--white); line-height: 1.1;
+  margin-bottom: 0.5rem; animation: fadeUp 0.5s ease 0.1s both;
+}
+.hero-title-sub {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem; color: var(--cyan); margin-bottom: 1.5rem;
+  animation: fadeUp 0.5s ease 0.15s both;
+}
+
+.hero-desc {
+  font-size: 1.1rem; color: rgba(255,255,255,0.65); line-height: 1.7;
+  max-width: 560px; margin-bottom: 2rem;
+  animation: fadeUp 0.5s ease 0.2s both;
+}
+
+.hero-stats-row {
+  display: flex; gap: 2rem; flex-wrap: wrap;
+  margin-bottom: 2.5rem; animation: fadeUp 0.5s ease 0.25s both;
+}
+.hero-stat { text-align: center; }
+.hero-stat-val {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem; color: var(--cyan);
+}
+.hero-stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.45); }
+
+.hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.5s ease 0.3s both; }
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--cyan); color: var(--navy); padding: 0.9rem 2rem; border-radius: 8px;
+  font-weight: 600; text-decoration: none; transition: all 0.2s;
+  box-shadow: 0 0 30px rgba(34,211,238,0.25);
+}
+.btn-primary:hover { background: var(--white); transform: translateY(-2px); }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.2);
+  padding: 0.9rem 1.5rem; border-radius: 8px;
+  text-decoration: none; font-size: 1rem; transition: all 0.2s;
+}
+.btn-ghost:hover { border-color: var(--cyan); color: var(--cyan); }
+
+/* PURCHASE CARD */
+.purchase-card {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(34,211,238,0.2);
+  border-radius: 20px; padding: 2rem;
+  backdrop-filter: blur(12px); animation: fadeIn 0.8s ease 0.4s both;
+  position: sticky; top: 6rem;
+}
+.purchase-price {
+  text-align: center; margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.price-main { font-family: 'DM Serif Display', serif; font-size: 3.5rem; color: var(--cyan); }
+.price-was { font-size: 1.2rem; color: rgba(255,255,255,0.3); text-decoration: line-through; }
+.price-tag { font-size: 0.8rem; color: var(--amber); font-weight: 600; }
+.price-note { font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-top: 0.25rem; }
+
+.purchase-includes {
+  margin-bottom: 1.5rem;
+}
+.includes-label {
+  font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4); margin-bottom: 0.75rem;
+}
+.include-item {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.6rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 0.9rem; color: rgba(255,255,255,0.75);
+}
+.include-item:last-child { border-bottom: none; }
+.include-icon { color: var(--cyan); font-size: 0.9rem; }
+
+.purchase-btn {
+  display: block; text-align: center; width: 100%;
+  background: var(--cyan); color: var(--navy);
+  padding: 1rem; border-radius: 8px; text-decoration: none;
+  font-weight: 600; font-size: 1rem; transition: all 0.2s;
+  margin-bottom: 0.75rem;
+}
+.purchase-btn:hover { background: var(--white); }
+.purchase-demo-link {
+  display: block; text-align: center;
+  color: rgba(255,255,255,0.5); font-size: 0.85rem;
+  text-decoration: none; transition: color 0.2s;
+}
+.purchase-demo-link:hover { color: var(--cyan); }
+
+/* SECTIONS */
+section { padding: 6rem 4rem; }
+.section-label {
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--cyan-dark); margin-bottom: 0.75rem;
+}
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.8rem, 3vw, 2.5rem); color: var(--navy);
+  line-height: 1.2; margin-bottom: 1rem;
+}
+.section-sub {
+  font-size: 1rem; color: var(--text-muted); line-height: 1.7; max-width: 600px;
+}
+
+/* HOW IT WORKS */
+.how { background: var(--ice); }
+.steps {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-top: 4rem;
+}
+.step {
+  position: relative; padding: 2rem;
+  background: var(--white); border-radius: 16px;
+  border-top: 3px solid transparent;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.step:hover { border-top-color: var(--cyan); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+.step-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2.5rem; font-weight: 600;
+  color: rgba(27,58,92,0.1); margin-bottom: 1rem; line-height: 1;
+}
+.step h3 { font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.5rem; }
+.step p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+
+/* SIGNALS */
+.signals { background: var(--white); }
+.signals-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 3rem;
+}
+.signal-category {
+  background: var(--ice); border-radius: 16px; padding: 1.75rem;
+  border-left: 4px solid var(--navy);
+  transition: transform 0.2s;
+}
+.signal-category:hover { transform: translateY(-3px); }
+.signal-category.cost { border-left-color: var(--red); }
+.signal-category.schedule { border-left-color: var(--amber); }
+.signal-category.invoice { border-left-color: var(--cyan-dark); }
+.signal-category.risk { border-left-color: var(--green); }
+.signal-category.status { border-left-color: #8B5CF6; }
+
+.sig-cat-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.sig-cat-name { font-size: 0.85rem; font-weight: 600; color: var(--navy); }
+.sig-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem; color: var(--text-muted);
+}
+.sig-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.sig-item {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.82rem; color: var(--text-muted);
+  padding: 0.35rem 0; border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.sig-item:last-child { border-bottom: none; }
+.sig-score {
+  font-family: 'JetBrains Mono', monospace; font-weight: 600;
+  color: var(--navy); font-size: 0.8rem;
+}
+
+/* BUNDLE */
+.bundle { background: var(--navy); }
+.bundle-title { color: var(--white); }
+.bundle-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem;
+}
+.bundle-item {
+  background: rgba(255,255,255,0.06); border-radius: 16px; padding: 2rem;
+  border: 1px solid rgba(34,211,238,0.15);
+  transition: border-color 0.2s;
+}
+.bundle-item:hover { border-color: rgba(34,211,238,0.4); }
+.bundle-icon { font-size: 2rem; margin-bottom: 1rem; }
+.bundle-name { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--white); margin-bottom: 0.5rem; }
+.bundle-file { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--cyan); margin-bottom: 0.75rem; }
+.bundle-desc { font-size: 0.9rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+/* FAQ */
+.faq { background: var(--ice); }
+.faq-list { display: flex; flex-direction: column; gap: 1rem; max-width: 760px; margin-top: 3rem; }
+.faq-item {
+  background: var(--white); border-radius: 12px; overflow: hidden;
+}
+.faq-q {
+  width: 100%; text-align: left; padding: 1.25rem 1.5rem;
+  background: none; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 0.95rem; font-weight: 600; color: var(--navy);
+  transition: color 0.2s;
+}
+.faq-q:hover { color: var(--cyan-dark); }
+.faq-toggle { font-size: 1.25rem; color: var(--cyan-dark); transition: transform 0.2s; }
+.faq-a {
+  padding: 0 1.5rem 1.25rem;
+  font-size: 0.9rem; color: var(--text-muted); line-height: 1.7;
+  display: none;
+}
+.faq-item.open .faq-a { display: block; }
+.faq-item.open .faq-toggle { transform: rotate(45deg); }
+
+/* BOTTOM CTA */
+.bottom-cta {
+  padding: 7rem 4rem; background: var(--navy); text-align: center;
+  position: relative; overflow: hidden;
+}
+.bottom-cta::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(34,211,238,0.04) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(34,211,238,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.bottom-cta-content { position: relative; z-index: 2; }
+.bottom-cta h2 {
+  font-family: 'DM Serif Display', serif; font-size: 2.8rem; color: var(--white); margin-bottom: 1rem;
+}
+.bottom-cta p { font-size: 1.1rem; color: rgba(255,255,255,0.55); max-width: 500px; margin: 0 auto 2.5rem; }
+.bottom-price {
+  display: flex; align-items: baseline; gap: 0.75rem; justify-content: center;
+  margin-bottom: 0.5rem;
+}
+.bottom-price-main { font-family: 'DM Serif Display', serif; font-size: 3rem; color: var(--cyan); }
+.bottom-price-was { font-size: 1.3rem; color: rgba(255,255,255,0.25); text-decoration: line-through; }
+.bottom-note { font-size: 0.85rem; color: rgba(255,255,255,0.35); margin-bottom: 2rem; }
+
+footer {
+  background: #0A1929; padding: 2.5rem 4rem;
+  border-top: 1px solid rgba(34,211,238,0.1);
+}
+.footer-inner {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;
+}
+.footer-brand { font-family: 'DM Serif Display', serif; color: rgba(255,255,255,0.4); }
+.footer-brand span { color: var(--cyan); }
+.footer-links { display: flex; gap: 2rem; list-style: none; }
+.footer-links a { color: rgba(255,255,255,0.3); text-decoration: none; font-size: 0.85rem; }
+.footer-links a:hover { color: var(--cyan); }
+.footer-copy { color: rgba(255,255,255,0.2); font-size: 0.8rem; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .hero { padding: 7rem 1.5rem 4rem; }
+  .hero-layout { grid-template-columns: 1fr; }
+  .purchase-card { position: static; }
+  .steps, .signals-grid, .bundle-grid { grid-template-columns: 1fr; }
+  section { padding: 4rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-mark">FM</div>
+    <span class="nav-logo-text">Foresight<span>Mint</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="demo.html">Live Demo</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="https://foresightmint.gumroad.com/l/zccou" class="nav-cta" target="_blank">Buy $49 →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+
+  <div class="breadcrumb">
+    <a href="index.html">ForesightMint</a>
+    <span>›</span>
+    <span style="color:rgba(255,255,255,0.7)">Risk Radar</span>
+  </div>
+
+  <div class="hero-layout">
+    <div>
+      <div class="hero-badge">◆ Power BI Starter Pack · V1</div>
+      <h1 class="hero-title">Risk Radar</h1>
+      <div class="hero-title-sub">Automatic status mismatch detection<br>for Power BI.</div>
+      <p class="hero-desc">
+        A pre-built Power BI report + documented Excel data model that automatically detects when reported project status isn't supported by data. 21 risk signals. Plain-English narratives. Setup in 30 minutes.
+      </p>
+
+      <div class="hero-stats-row">
+        <div class="hero-stat">
+          <div class="hero-stat-val">21</div>
+          <div class="hero-stat-label">Risk Signals</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">30</div>
+          <div class="hero-stat-label">Min Setup</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">$49</div>
+          <div class="hero-stat-label">One-time</div>
+        </div>
+      </div>
+
+      <div class="hero-cta">
+        <a href="https://foresightmint.gumroad.com/l/zccou" class="btn-primary" target="_blank">Buy Now — $49 →</a>
+        <a href="demo.html" class="btn-ghost">▶ See Live Demo</a>
+      </div>
+    </div>
+
+    <div class="purchase-card">
+      <div class="purchase-price">
+        <div><span class="price-main">$49</span> <span class="price-was">$99</span></div>
+        <div class="price-tag">◆ Launch price</div>
+        <div class="price-note">One-time · No subscription</div>
+      </div>
+      <div class="purchase-includes">
+        <div class="includes-label">What's Included</div>
+        <div class="include-item"><span class="include-icon">◆</span> RiskRadar.pbix — Power BI Report</div>
+        <div class="include-item"><span class="include-icon">◆</span> RiskRadar_MVD.xlsx — 7-tab Excel model</div>
+        <div class="include-item"><span class="include-icon">◆</span> Getting Started Guide (.docx)</div>
+        <div class="include-item"><span class="include-icon">◆</span> 21 pre-built DAX signal measures</div>
+        <div class="include-item"><span class="include-icon">◆</span> EZ Widgets mock data included</div>
+        <div class="include-item"><span class="include-icon">◆</span> Full DAX Reference tab</div>
+      </div>
+      <a href="https://foresightmint.gumroad.com/l/zccou" class="purchase-btn" target="_blank">Get Risk Radar →</a>
+      <a href="demo.html" class="purchase-demo-link">▶ Try the live demo first</a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="section-label">How It Works</div>
+  <h2 class="section-title">From your Excel data to<br>executive insights in 30 minutes.</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>Download the Bundle</h3>
+      <p>Get the .pbix report, Excel MVD, and Getting Started guide from Gumroad instantly after purchase.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>Populate Your Data</h3>
+      <p>Enter your project data into the 6 source tabs of the Excel MVD. Documented field-by-field with examples.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>Connect Power BI</h3>
+      <p>Open RiskRadar.pbix and point it at your Excel file. All DAX measures, signals, and narratives load automatically.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <h3>See What's Real</h3>
+      <p>The Executive Summary shows status confidence (VALIDATED / UNSUPPORTED) and a prioritized action plan per project.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SIGNALS -->
+<section class="signals">
+  <div class="section-label">Signal Library</div>
+  <h2 class="section-title">21 signals across every<br>dimension of project health.</h2>
+  <p class="section-sub">Each signal fires based on objective data thresholds — not gut feel. Scored by severity. Aggregated into a single Risk Score.</p>
+
+  <div class="signals-grid">
+    <div class="signal-category cost">
+      <div class="sig-cat-header">
+        <span class="sig-cat-name">💰 Earned Value (Cost)</span>
+        <span class="sig-count">6 signals</span>
+      </div>
+      <div class="sig-list">
+        <div class="sig-item"><span>CPI 0.80–0.89</span><span class="sig-score">+2</span></div>
+        <div class="sig-item"><span>CPI 0.65–0.79</span><span class="sig-score">+4</span></div>
+        <div class="sig-item"><span>CPI &lt; 0.65</span><span class="sig-score">+6</span></div>
+        <div class="sig-item"><span>SPI 0.80–0.89</span><span class="sig-score">+2</span></div>
+        <div class="sig-item"><span>SPI 0.65–0.79</span><span class="sig-score">+4</span></div>
+        <div class="sig-item"><span>SPI &lt; 0.65</span><span class="sig-score">+6</span></div>
+      </div>
+    </div>
+
+    <div class="signal-category schedule">
+      <div class="sig-cat-header">
+        <span class="sig-cat-name">📅 Schedule</span>
+        <span class="sig-count">4 signals</span>
+      </div>
+      <div class="sig-list">
+        <div class="sig-item"><span>Project 5–15pt lag</span><span class="sig-score">+2</span></div>
+        <div class="sig-item"><span>Project 15pt+ lag</span><span class="sig-score">+5</span></div>
+        <div class="sig-item"><span>Feature 10pt+ lag</span><span class="sig-score">+2</span></div>
+        <div class="sig-item"><span>Capability 10pt+ lag</span><span class="sig-score">+4</span></div>
+      </div>
+    </div>
+
+    <div class="signal-category risk">
+      <div class="sig-cat-header">
+        <span class="sig-cat-name">⚠️ Risk Register</span>
+        <span class="sig-count">5 signals</span>
+      </div>
+      <div class="sig-list">
+        <div class="sig-item"><span>Stale open risk</span><span class="sig-score">+1</span></div>
+        <div class="sig-item"><span>No mitigation plan</span><span class="sig-score">+2</span></div>
+        <div class="sig-item"><span>Past resolution date</span><span class="sig-score">+3</span></div>
+        <div class="sig-item"><span>Yellow + no open risks</span><span class="sig-score">+2</span></div>
+        <div class="sig-item"><span>Red + no open risks</span><span class="sig-score">+5</span></div>
+      </div>
+    </div>
+
+    <div class="signal-category invoice">
+      <div class="sig-cat-header">
+        <span class="sig-cat-name">🧾 Invoices</span>
+        <span class="sig-count">4 signals</span>
+      </div>
+      <div class="sig-list">
+        <div class="sig-item"><span>Receipt 7–13 days late</span><span class="sig-score">+1</span></div>
+        <div class="sig-item"><span>Receipt 14+ days late</span><span class="sig-score">+3</span></div>
+        <div class="sig-item"><span>Unpaid 7–13 days</span><span class="sig-score">+1</span></div>
+        <div class="sig-item"><span>Unpaid 14+ days</span><span class="sig-score">+3</span></div>
+      </div>
+    </div>
+
+    <div class="signal-category status">
+      <div class="sig-cat-header">
+        <span class="sig-cat-name">📋 Status Reporting</span>
+        <span class="sig-count">2 signals</span>
+      </div>
+      <div class="sig-list">
+        <div class="sig-item"><span>Not updated 7–13 days</span><span class="sig-score">+2</span></div>
+        <div class="sig-item"><span>Not updated 14+ days</span><span class="sig-score">+5</span></div>
+      </div>
+    </div>
+
+    <div class="signal-category" style="border-left-color: var(--navy); background: var(--navy); color: white;">
+      <div class="sig-cat-header">
+        <span class="sig-cat-name" style="color:var(--cyan);">📊 Score → RYG</span>
+        <span class="sig-count" style="color:rgba(255,255,255,0.4)">computed</span>
+      </div>
+      <div class="sig-list">
+        <div class="sig-item" style="color:rgba(255,255,255,0.7); border-bottom-color:rgba(255,255,255,0.08)">
+          <span>Score 0–4</span><span class="sig-score" style="color:#10B981">GREEN</span>
+        </div>
+        <div class="sig-item" style="color:rgba(255,255,255,0.7); border-bottom-color:rgba(255,255,255,0.08)">
+          <span>Score 5–14</span><span class="sig-score" style="color:#F59E0B">YELLOW</span>
+        </div>
+        <div class="sig-item" style="color:rgba(255,255,255,0.7); border-bottom-color:rgba(255,255,255,0.08)">
+          <span>Score 15+</span><span class="sig-score" style="color:#EF4444">RED</span>
+        </div>
+        <div class="sig-item" style="color:rgba(255,255,255,0.5); font-style:italic; font-size:0.78rem; padding-top:0.5rem; border:none">
+          Compared to Reported RYG to detect mismatches
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUNDLE -->
+<section class="bundle">
+  <div class="section-label" style="color:rgba(34,211,238,0.6)">What You Get</div>
+  <h2 class="section-title bundle-title">Everything you need.<br>Nothing you don't.</h2>
+  <div class="bundle-grid">
+    <div class="bundle-item">
+      <div class="bundle-icon">📊</div>
+      <div class="bundle-name">Power BI Report</div>
+      <div class="bundle-file">RiskRadar.pbix</div>
+      <div class="bundle-desc">Executive Summary page with status confidence badges, project narratives, and action plans. Signal Detail page showing all fired signals per project.</div>
+    </div>
+    <div class="bundle-item">
+      <div class="bundle-icon">📋</div>
+      <div class="bundle-name">Excel Data Model</div>
+      <div class="bundle-file">RiskRadar_MVD.xlsx</div>
+      <div class="bundle-desc">7 tabs: README, Projects, RiskRegister, StatusReports, WorkItems, Invoices, DAX Reference. Fully documented with EZ Widgets mock data pre-loaded.</div>
+    </div>
+    <div class="bundle-item">
+      <div class="bundle-icon">📘</div>
+      <div class="bundle-name">Getting Started Guide</div>
+      <div class="bundle-file">RiskRadar_Getting_Started.docx</div>
+      <div class="bundle-desc">Step-by-step setup, field explanations, tips for populating your data, FAQ, and a Beyond Excel section for teams ready to go further.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="section-label">FAQ</div>
+  <h2 class="section-title">Common questions.</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        Do I need Power BI Pro or Premium?
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-a">You need Power BI Desktop (free) to open and use the report with your own data. Power BI Pro or Premium is only required if you want to publish and share the report within your organization via the Power BI Service.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        Can I use Google Sheets instead of Excel?
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-a">The MVD is designed for Excel. Power BI can connect to Google Sheets, but requires some configuration. The Getting Started guide covers the steps to make this work. The core structure is identical — it's a straightforward import.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        How many projects can Risk Radar handle?
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-a">The data model is a standard star schema — it scales to hundreds of projects limited only by your machine's memory and Power BI's data model capacity. The demo ships with 3 projects. At 50 projects, Risk Radar becomes a true early warning system.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        What if my data doesn't match the MVD structure exactly?
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-a">The MVD is designed to be adapted. Each field is documented in the README tab. If your source data has different field names or structures, the Getting Started guide explains how to map your data to the model. Most organizations can adapt in under an hour.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        Is this a subscription or one-time purchase?
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-a">One-time purchase. You own the files. No recurring fees, no account required after download, no lock-in. If we release major updates, we'll announce them — but V1 is complete and fully functional as delivered.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        What does "status mismatch" mean exactly?
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-a">Every project has a Reported RYG (what the PM entered in their status report) and a Computed RYG (what the data says based on 21 weighted signals). If a project reports Green but the signals produce a Red score, Risk Radar flags it as UNSUPPORTED. That's a status mismatch — and that's what leadership needs to know about.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="bottom-cta">
+  <div class="bottom-cta-content">
+    <h2>Start seeing what<br>your data is telling you.</h2>
+    <p>Setup in 30 minutes. No subscription. Everything included.</p>
+    <div class="bottom-price">
+      <span class="bottom-price-main">$49</span>
+      <span class="bottom-price-was">$99</span>
+    </div>
+    <div class="bottom-note">Launch price · One-time fee · Instant download</div>
+    <a href="https://foresightmint.gumroad.com/l/zccou" class="btn-primary" style="font-size:1.1rem; padding:1rem 2.5rem;" target="_blank">
+      Get Risk Radar Now →
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">Foresight<span>Mint</span></div>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="demo.html">Live Demo</a></li>
+      <li><a href="https://foresightmint.gumroad.com/l/zccou" target="_blank">Buy</a></li>
+      <li><a href="mailto:stephen@foresightmint.com">Contact</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 ForesightMint</div>
+  </div>
+</footer>
+
+</body>
+</html>
