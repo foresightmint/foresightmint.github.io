@@ -6,7 +6,7 @@
   <title>ForesightMint — Risk Radar | Coming Soon</title>
   <meta name="description" content="Risk Radar automatically detects when reported project status isn't supported by data. Built on 30 years of enterprise program management experience. Launching soon."/>
   <meta property="og:title" content="ForesightMint — Risk Radar"/>
-  <meta property="og:description" content="You can't trust your Greens. Risk Radar surfaces the projects hiding in plain sight."/>
+  <meta property="og:description" content="What your status reports aren't telling you. Risk Radar surfaces the projects hiding in plain sight."/>
   <meta property="og:url" content="https://foresightmint.com"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -343,12 +343,12 @@
 
     <div class="pill">
       <div class="pill-dot"></div>
-      Launching soon
+      Now live
     </div>
 
     <div class="eyebrow">Power BI Starter Pack for Program Managers</div>
 
-    <h1>You can't trust<br>your <span>Greens.</span></h1>
+    <h1>What your status reports<br>aren't <span>telling you.</span></h1>
 
     <p class="sub">Risk Radar automatically detects when reported project status isn't supported by data — before it becomes a crisis. Built on 30 years of enterprise program management experience.</p>
 
@@ -358,12 +358,19 @@
       <span class="price-badge">Launch price</span>
     </div>
 
-    <div class="form-wrap">
-      <input type="email" id="email-input" placeholder="your@email.com" autocomplete="email"/>
-      <button class="btn-cta" onclick="notifyMe()">Notify me at launch</button>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:14px;">
+      <a href="https://foresightmint.gumroad.com/l/zccou" style="background:#22D3EE;color:#0C2D4A;border:none;padding:14px 28px;border-radius:7px;font-size:15px;font-weight:800;font-family:'Inter',sans-serif;cursor:pointer;text-decoration:none;white-space:nowrap;">Get Risk Radar — $49</a>
+      <button class="btn-cta" style="background:transparent;color:#B0C8E8;border:2px solid #B0C8E8;padding:14px 24px;" onclick="notifyMe()">Notify me of updates</button>
     </div>
 
-    <p class="form-note">No spam. One email when Risk Radar launches.</p>
+    <p class="form-note">One-time purchase. No subscription. No renewal.</p>
+
+    <div class="form-wrap" style="margin-top:16px;">
+      <input type="email" id="email-input" placeholder="your@email.com" autocomplete="email"/>
+      <button class="btn-cta" onclick="notifyMe()">Get launch updates</button>
+    </div>
+
+    <p class="form-note">No spam. Updates on new releases and features.</p>
 
     <div class="divider"></div>
 
@@ -391,12 +398,12 @@
   <footer>
     © 2026 ForesightMint &nbsp;·&nbsp;
     <a href="https://foresightmint.com">foresightmint.com</a> &nbsp;·&nbsp;
-    <a href="mailto:stephen@foresightmint.com">stephen@foresightmint.com</a>
+    <a href="/cdn-cgi/l/email-protection#74070011041c111a34121b0611071d131c00191d1a005a171b19"><span class="__cf_email__" data-cfemail="5e2d2a3b2e363b301e38312c3b2d3739362a3337302a703d3133">[email&#160;protected]</span></a>
   </footer>
 
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   function notifyMe() {
     const email = document.getElementById('email-input').value.trim();
     if (!email || !email.includes('@') || !email.includes('.')) {
@@ -410,13 +417,4 @@
       'My email: ' + email + '\n\n' +
       'Thanks!'
     );
-    window.location.href = 'mailto:stephen@foresightmint.com?subject=' + subject + '&body=' + body;
-  }
-
-  document.getElementById('email-input').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') notifyMe();
-  });
-</script>
-
-</body>
-</html>
+    w
