@@ -3,1059 +3,887 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ForesightMint — What your status reports aren't telling you.</title>
+<title>Stephen Yuhas — Program Management & PMO Leadership</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --navy: #1B3A5C;
-  --navy-light: #234870;
-  --cyan: #22D3EE;
-  --cyan-dark: #0096B7;
-  --amber: #F59E0B;
-  --ice: #F1F5F9;
-  --red: #EF4444;
-  --green: #10B981;
-  --white: #FFFFFF;
-  --text-dark: #0F1E2E;
-  --text-muted: #64748B;
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: 'DM Sans', sans-serif;
-  color: var(--text-dark);
-  background: var(--white);
-  overflow-x: hidden;
-}
-
-/* NAV */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 1.25rem 4rem;
-  background: rgba(27,58,92,0.97);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(34,211,238,0.15);
-}
-
-.nav-logo {
-  display: flex; align-items: center; gap: 0.6rem;
-  text-decoration: none;
-}
-.nav-logo-mark {
-  width: 32px; height: 32px;
-  background: var(--cyan); border-radius: 6px;
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 14px; font-weight: 600; color: var(--navy);
-}
-.nav-logo-text {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.3rem; color: var(--white); letter-spacing: -0.01em;
-}
-.nav-logo-text span { color: var(--cyan); }
-
-.nav-links {
-  display: flex; align-items: center; gap: 2.5rem;
-  list-style: none;
-}
-.nav-links a {
-  color: rgba(255,255,255,0.75);
-  text-decoration: none; font-size: 0.9rem; font-weight: 500;
-  transition: color 0.2s;
-}
-.nav-links a:hover { color: var(--cyan); }
-
-.nav-cta {
-  background: var(--cyan); color: var(--navy) !important;
-  padding: 0.5rem 1.25rem; border-radius: 6px;
-  font-weight: 600 !important; transition: all 0.2s !important;
-}
-.nav-cta:hover { background: var(--white) !important; color: var(--navy) !important; }
-
-/* HERO */
-.hero {
-  min-height: 100vh;
-  background: var(--navy);
-  display: flex; align-items: center;
-  position: relative; overflow: hidden;
-  padding: 8rem 4rem 6rem;
-}
-
-.hero-grid-bg {
-  position: absolute; inset: 0;
-  background-image: linear-gradient(rgba(34,211,238,0.06) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(34,211,238,0.06) 1px, transparent 1px);
-  background-size: 48px 48px;
-}
-
-.hero-glow {
-  position: absolute; top: -200px; right: -200px;
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(34,211,238,0.12) 0%, transparent 70%);
-}
-.hero-glow-2 {
-  position: absolute; bottom: -100px; left: 30%;
-  width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 70%);
-}
-
-.hero-content {
-  position: relative; z-index: 2;
-  max-width: 700px;
-}
-
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.4);
-  color: var(--amber); padding: 0.35rem 0.85rem; border-radius: 100px;
-  font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em;
-  text-transform: uppercase; margin-bottom: 2rem;
-  animation: fadeUp 0.6s ease both;
-}
-.hero-badge::before { content: '◆'; font-size: 0.6rem; }
-
-.hero-headline {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(2.8rem, 5vw, 4.2rem);
-  line-height: 1.1; color: var(--white);
-  margin-bottom: 1.5rem;
-  animation: fadeUp 0.6s ease 0.1s both;
-}
-.hero-headline em { color: var(--cyan); font-style: italic; }
-
-.hero-sub {
-  font-size: 1.2rem; color: rgba(255,255,255,0.65);
-  line-height: 1.7; max-width: 560px;
-  margin-bottom: 2.5rem;
-  animation: fadeUp 0.6s ease 0.2s both;
-  font-weight: 300;
-}
-
-.hero-actions {
-  display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
-  animation: fadeUp 0.6s ease 0.3s both;
-}
-
-.btn-primary {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  background: var(--cyan); color: var(--navy);
-  padding: 0.9rem 2rem; border-radius: 8px;
-  font-weight: 600; font-size: 1rem;
-  text-decoration: none; transition: all 0.2s;
-  box-shadow: 0 0 30px rgba(34,211,238,0.3);
-}
-.btn-primary:hover {
-  background: var(--white);
-  box-shadow: 0 0 40px rgba(34,211,238,0.5);
-  transform: translateY(-2px);
-}
-
-.btn-ghost {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  color: rgba(255,255,255,0.75); padding: 0.9rem 1.5rem;
-  border: 1px solid rgba(255,255,255,0.2); border-radius: 8px;
-  text-decoration: none; font-size: 1rem; font-weight: 500;
-  transition: all 0.2s;
-}
-.btn-ghost:hover {
-  border-color: var(--cyan); color: var(--cyan);
-}
-
-.hero-right {
-  position: absolute; right: 4rem; top: 50%;
-  transform: translateY(-50%);
-  width: 420px;
-  animation: fadeIn 1s ease 0.4s both;
-}
-
-/* STAT CARDS in hero */
-.hero-stats {
-  display: grid; gap: 1rem;
-}
-.stat-card {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(34,211,238,0.2);
-  border-radius: 12px; padding: 1.5rem;
-  backdrop-filter: blur(10px);
-  position: relative; overflow: hidden;
-}
-.stat-card::before {
-  content: ''; position: absolute; top: 0; left: 0;
-  height: 3px; width: 60px; background: var(--cyan);
-  border-radius: 0 0 3px 3px;
-}
-.stat-card.amber::before { background: var(--amber); }
-.stat-card.red::before { background: var(--red); }
-
-.stat-label {
-  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
-  text-transform: uppercase; color: rgba(255,255,255,0.45);
-  margin-bottom: 0.5rem;
-}
-.stat-value {
-  font-family: 'DM Serif Display', serif;
-  font-size: 2rem; color: var(--white);
-}
-.stat-meta {
-  font-size: 0.85rem; color: rgba(255,255,255,0.55);
-  margin-top: 0.25rem;
-}
-.stat-badge {
-  display: inline-block; margin-top: 0.75rem;
-  padding: 0.25rem 0.75rem; border-radius: 100px;
-  font-size: 0.75rem; font-weight: 600;
-  background: rgba(239,68,68,0.2); color: var(--red);
-  border: 1px solid rgba(239,68,68,0.3);
-}
-.stat-badge.green {
-  background: rgba(16,185,129,0.2); color: var(--green);
-  border-color: rgba(16,185,129,0.3);
-}
-
-/* THE PROBLEM */
-.problem {
-  padding: 8rem 4rem;
-  background: var(--ice);
-}
-
-.section-label {
-  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
-  text-transform: uppercase; color: var(--cyan-dark);
-  margin-bottom: 1rem;
-}
-
-.section-headline {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(2rem, 3.5vw, 2.8rem);
-  color: var(--navy); line-height: 1.2;
-  margin-bottom: 1.5rem;
-}
-
-.problem-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
-  align-items: start; margin-top: 4rem;
-}
-
-.problem-list {
-  display: flex; flex-direction: column; gap: 1.5rem;
-}
-
-.problem-item {
-  display: flex; gap: 1.25rem; align-items: flex-start;
-  padding: 1.5rem; background: var(--white);
-  border-radius: 12px; border-left: 4px solid transparent;
-  transition: border-color 0.2s;
-}
-.problem-item:hover { border-left-color: var(--red); }
-
-.problem-icon {
-  width: 36px; height: 36px; border-radius: 8px;
-  background: rgba(239,68,68,0.1);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.1rem; flex-shrink: 0;
-}
-
-.problem-item h3 {
-  font-size: 1rem; font-weight: 600; color: var(--navy);
-  margin-bottom: 0.35rem;
-}
-.problem-item p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
-
-.problem-quote {
-  background: var(--navy); border-radius: 16px;
-  padding: 3rem; position: relative; overflow: hidden;
-}
-.problem-quote::before {
-  content: '"'; position: absolute; top: -1rem; left: 2rem;
-  font-family: 'DM Serif Display', serif;
-  font-size: 8rem; color: rgba(34,211,238,0.1); line-height: 1;
-}
-.problem-quote blockquote {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.5rem; color: var(--white);
-  line-height: 1.5; position: relative; z-index: 2;
-  margin-bottom: 1.5rem;
-}
-.problem-quote blockquote em { color: var(--cyan); font-style: italic; }
-.problem-quote cite {
-  font-size: 0.85rem; color: rgba(255,255,255,0.5);
-  font-style: normal;
-}
-.audience-tag {
-  display: inline-block; padding: 0.25rem 0.75rem;
-  background: rgba(34,211,238,0.15); color: var(--cyan);
-  border-radius: 100px; font-size: 0.75rem; font-weight: 600;
-  letter-spacing: 0.05em; text-transform: uppercase;
-  margin-bottom: 1.5rem;
-}
-
-/* PRODUCTS */
-.products {
-  padding: 8rem 4rem;
-  background: var(--white);
-}
-
-.products-header {
-  text-align: center; max-width: 600px; margin: 0 auto 5rem;
-}
-
-.product-card {
-  max-width: 960px; margin: 0 auto;
-  background: var(--navy); border-radius: 24px;
-  overflow: hidden; display: grid;
-  grid-template-columns: 1fr 1fr;
-  box-shadow: 0 40px 80px rgba(27,58,92,0.25);
-}
-
-.product-info {
-  padding: 4rem;
-}
-
-.product-tag {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  background: rgba(245,158,11,0.2); color: var(--amber);
-  border: 1px solid rgba(245,158,11,0.4);
-  padding: 0.35rem 0.85rem; border-radius: 100px;
-  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
-  text-transform: uppercase; margin-bottom: 1.5rem;
-}
-
-.product-name {
-  font-family: 'DM Serif Display', serif;
-  font-size: 2.5rem; color: var(--white);
-  line-height: 1.15; margin-bottom: 1rem;
-}
-.product-name span { color: var(--cyan); }
-
-.product-desc {
-  font-size: 1rem; color: rgba(255,255,255,0.65);
-  line-height: 1.7; margin-bottom: 2rem;
-}
-
-.product-features {
-  display: flex; flex-direction: column; gap: 0.75rem;
-  margin-bottom: 2.5rem;
-}
-.feature-item {
-  display: flex; align-items: center; gap: 0.75rem;
-  font-size: 0.9rem; color: rgba(255,255,255,0.75);
-}
-.feature-check { color: var(--cyan); font-size: 1rem; }
-
-.product-price {
-  display: flex; align-items: baseline; gap: 0.5rem;
-  margin-bottom: 1.5rem;
-}
-.price-current {
-  font-family: 'DM Serif Display', serif;
-  font-size: 2.5rem; color: var(--cyan);
-}
-.price-regular {
-  font-size: 1rem; color: rgba(255,255,255,0.4);
-  text-decoration: line-through;
-}
-.price-label {
-  font-size: 0.8rem; color: var(--amber); font-weight: 600;
-}
-
-.product-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-
-.btn-buy {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  background: var(--cyan); color: var(--navy);
-  padding: 0.875rem 1.75rem; border-radius: 8px;
-  font-weight: 600; text-decoration: none; transition: all 0.2s;
-}
-.btn-buy:hover { background: var(--white); transform: translateY(-2px); }
-
-.btn-demo {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.2);
-  padding: 0.875rem 1.5rem; border-radius: 8px;
-  text-decoration: none; font-size: 0.9rem; font-weight: 500;
-  transition: all 0.2s;
-}
-.btn-demo:hover { border-color: var(--cyan); color: var(--cyan); }
-
-.product-visual {
-  background: rgba(0,0,0,0.3);
-  padding: 3rem 2rem;
-  display: flex; flex-direction: column; justify-content: center; gap: 1rem;
-  border-left: 1px solid rgba(255,255,255,0.08);
-}
-
-.mini-dashboard {
-  background: rgba(255,255,255,0.05);
-  border-radius: 12px; padding: 1.25rem;
-  border: 1px solid rgba(34,211,238,0.15);
-}
-.mini-dashboard-header {
-  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em;
-  text-transform: uppercase; color: rgba(255,255,255,0.4);
-  margin-bottom: 1rem;
-}
-.mini-project-row {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0.6rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-.mini-project-row:last-child { border-bottom: none; }
-.mini-project-name { font-size: 0.85rem; color: rgba(255,255,255,0.7); }
-.mini-ryg {
-  display: flex; gap: 0.5rem; align-items: center;
-}
-.ryg-dot {
-  width: 10px; height: 10px; border-radius: 50%;
-}
-.ryg-label { font-size: 0.75rem; font-weight: 600; }
-
-.signal-bar {
-  background: rgba(255,255,255,0.05);
-  border-radius: 12px; padding: 1.25rem;
-  border: 1px solid rgba(245,158,11,0.2);
-}
-.signal-bar-label {
-  font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--amber); font-weight: 600; margin-bottom: 0.75rem;
-}
-.signal-item {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 0.5rem;
-}
-.signal-name { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
-.signal-score {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.8rem; font-weight: 600; color: var(--red);
-}
-
-/* PM SECTION */
-.pm-section {
-  padding: 8rem 4rem;
-  background: var(--ice);
-}
-
-.pm-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
-  align-items: center; max-width: 1100px; margin: 0 auto;
-}
-
-.pm-visual {
-  background: var(--navy); border-radius: 20px;
-  padding: 3rem; position: relative; overflow: hidden;
-}
-.pm-visual::after {
-  content: '';
-  position: absolute; bottom: -50px; right: -50px;
-  width: 200px; height: 200px;
-  background: radial-gradient(circle, rgba(34,211,238,0.15) 0%, transparent 70%);
-}
-
-.score-meter {
-  text-align: center; margin-bottom: 2rem;
-}
-.score-number {
-  font-family: 'DM Serif Display', serif;
-  font-size: 5rem; color: var(--red); line-height: 1;
-}
-.score-label {
-  font-size: 0.8rem; color: rgba(255,255,255,0.5);
-  text-transform: uppercase; letter-spacing: 0.1em;
-}
-.score-status {
-  display: inline-block; margin-top: 0.5rem;
-  padding: 0.3rem 0.9rem; border-radius: 100px;
-  background: rgba(239,68,68,0.2); color: var(--red);
-  border: 1px solid rgba(239,68,68,0.3);
-  font-size: 0.8rem; font-weight: 600;
-}
-
-.signal-pills {
-  display: flex; flex-wrap: wrap; gap: 0.5rem;
-  justify-content: center;
-}
-.signal-pill {
-  padding: 0.3rem 0.75rem; border-radius: 100px;
-  font-size: 0.75rem; font-weight: 500;
-  background: rgba(239,68,68,0.15); color: rgba(255,255,255,0.7);
-  border: 1px solid rgba(239,68,68,0.2);
-}
-
-.pm-content { padding-left: 1rem; }
-.pm-tagline {
-  font-family: 'DM Serif Display', serif;
-  font-size: 0.95rem; color: var(--cyan-dark);
-  font-style: italic; margin-bottom: 0.5rem;
-}
-.pm-headline {
-  font-family: 'DM Serif Display', serif;
-  font-size: 2.4rem; color: var(--navy);
-  line-height: 1.2; margin-bottom: 1.25rem;
-}
-.pm-text {
-  font-size: 1rem; color: var(--text-muted);
-  line-height: 1.75; margin-bottom: 1.5rem;
-}
-.pm-points {
-  display: flex; flex-direction: column; gap: 0.75rem;
-  margin-bottom: 2rem;
-}
-.pm-point {
-  display: flex; gap: 0.75rem; align-items: flex-start;
-  font-size: 0.95rem; color: var(--text-dark);
-}
-.pm-point-icon { color: var(--cyan-dark); margin-top: 2px; }
-
-/* TRUST */
-.trust {
-  padding: 8rem 4rem;
-  background: var(--navy);
-  text-align: center;
-}
-
-.trust-headline {
-  font-family: 'DM Serif Display', serif;
-  font-size: 2.5rem; color: var(--white);
-  margin-bottom: 1rem;
-}
-.trust-headline em { color: var(--cyan); font-style: italic; }
-
-.trust-sub {
-  font-size: 1.1rem; color: rgba(255,255,255,0.55);
-  max-width: 580px; margin: 0 auto 4rem; line-height: 1.7;
-}
-
-.trust-pillars {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 2rem; max-width: 900px; margin: 0 auto;
-}
-.trust-pillar {
-  padding: 2.5rem 2rem;
-  background: rgba(255,255,255,0.05);
-  border-radius: 16px; border: 1px solid rgba(34,211,238,0.1);
-  transition: border-color 0.2s;
-}
-.trust-pillar:hover { border-color: rgba(34,211,238,0.3); }
-
-.pillar-icon {
-  font-size: 2rem; margin-bottom: 1.25rem;
-}
-.pillar-title {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.3rem; color: var(--white); margin-bottom: 0.75rem;
-}
-.pillar-text {
-  font-size: 0.9rem; color: rgba(255,255,255,0.5); line-height: 1.65;
-}
-
-/* ABOUT */
-.about {
-  padding: 8rem 4rem;
-  background: var(--white);
-}
-
-.about-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 6rem; align-items: center; max-width: 1100px; margin: 0 auto;
-}
-
-.about-accent {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.8rem; color: var(--cyan-dark);
-  letter-spacing: 0.05em; margin-bottom: 1.5rem;
-}
-.about-text {
-  font-size: 1.05rem; color: var(--text-muted);
-  line-height: 1.8; margin-bottom: 1.25rem;
-}
-.about-signature {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.2rem; color: var(--navy); margin-top: 2rem;
-}
-.about-title { font-size: 0.85rem; color: var(--text-muted); }
-
-.about-card {
-  background: var(--navy); border-radius: 20px;
-  padding: 3rem; color: var(--white);
-}
-.about-card-header {
-  font-size: 0.75rem; letter-spacing: 0.12em;
-  text-transform: uppercase; color: rgba(255,255,255,0.4);
-  margin-bottom: 2rem;
-}
-.credential {
-  display: flex; gap: 1rem; align-items: flex-start;
-  padding: 1.25rem 0; border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-.credential:last-child { border-bottom: none; }
-.cred-icon { color: var(--cyan); font-size: 1.2rem; margin-top: 2px; }
-.cred-label { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-bottom: 0.25rem; text-transform: uppercase; letter-spacing: 0.05em; }
-.cred-value { font-size: 0.95rem; color: rgba(255,255,255,0.85); }
-
-/* PRICING BANNER */
-.pricing-banner {
-  padding: 6rem 4rem;
-  background: linear-gradient(135deg, var(--navy) 0%, #0d2640 100%);
-  text-align: center; position: relative; overflow: hidden;
-}
-.pricing-banner::before {
-  content: '';
-  position: absolute; inset: 0;
-  background-image: linear-gradient(rgba(34,211,238,0.04) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(34,211,238,0.04) 1px, transparent 1px);
-  background-size: 32px 32px;
-}
-
-.pricing-banner-content { position: relative; z-index: 2; }
-
-.pricing-banner h2 {
-  font-family: 'DM Serif Display', serif;
-  font-size: 2.5rem; color: var(--white); margin-bottom: 1rem;
-}
-.pricing-banner p {
-  font-size: 1.1rem; color: rgba(255,255,255,0.6);
-  margin-bottom: 2.5rem; max-width: 500px; margin-left: auto; margin-right: auto;
-}
-
-.pricing-display {
-  display: flex; align-items: baseline; gap: 0.75rem;
-  justify-content: center; margin-bottom: 0.5rem;
-}
-.pricing-main {
-  font-family: 'DM Serif Display', serif;
-  font-size: 4rem; color: var(--cyan);
-}
-.pricing-regular {
-  font-size: 1.5rem; color: rgba(255,255,255,0.3);
-  text-decoration: line-through;
-}
-.pricing-note {
-  font-size: 0.85rem; color: rgba(255,255,255,0.4);
-  margin-bottom: 2.5rem;
-}
-.pricing-note strong { color: var(--amber); }
-
-/* FOOTER */
-footer {
-  background: #0A1929;
-  padding: 3rem 4rem;
-  border-top: 1px solid rgba(34,211,238,0.1);
-}
-.footer-inner {
-  display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 1.5rem;
-}
-.footer-brand {
-  font-family: 'DM Serif Display', serif;
-  color: rgba(255,255,255,0.5); font-size: 1rem;
-}
-.footer-brand span { color: var(--cyan); }
-.footer-links {
-  display: flex; gap: 2rem; list-style: none;
-}
-.footer-links a {
-  color: rgba(255,255,255,0.35); text-decoration: none;
-  font-size: 0.85rem; transition: color 0.2s;
-}
-.footer-links a:hover { color: var(--cyan); }
-.footer-copy {
-  color: rgba(255,255,255,0.25); font-size: 0.8rem;
-}
-
-/* ANIMATIONS */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-/* RESPONSIVE */
-@media (max-width: 900px) {
-  nav { padding: 1rem 1.5rem; }
-  .nav-links { display: none; }
-  .hero { flex-direction: column; padding: 7rem 1.5rem 4rem; }
-  .hero-right { position: static; transform: none; width: 100%; margin-top: 3rem; }
-  .problem-grid, .product-card, .pm-grid, .about-grid { grid-template-columns: 1fr; }
-  .trust-pillars { grid-template-columns: 1fr; }
-  .problem, .products, .pm-section, .trust, .about, .pricing-banner { padding: 5rem 1.5rem; }
-  .product-info { padding: 2rem; }
-  .product-visual { padding: 2rem; }
-}
+  :root {
+    --navy: #1B3A5C;
+    --navy-deep: #0F2339;
+    --navy-light: #234870;
+    --cyan: #22D3EE;
+    --cyan-dark: #0096B7;
+    --amber: #F59E0B;
+    --ice: #F1F5F9;
+    --white: #FFFFFF;
+    --text: #0F1E2E;
+    --muted: #64748B;
+    --border: #E2E8F0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 3rem;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    color: var(--navy);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--cyan-dark); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-cta {
+    background: var(--navy);
+    color: var(--white) !important;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 600 !important;
+  }
+  .nav-cta:hover { background: var(--cyan-dark) !important; color: var(--white) !important; }
+
+  /* HERO */
+  .hero {
+    padding: 9rem 3rem 4rem;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-inner { max-width: 1100px; margin: 0 auto; }
+  .availability {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(16,185,129,0.08);
+    border: 1px solid rgba(16,185,129,0.25);
+    color: #059669;
+    padding: 0.35rem 0.85rem;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 1.75rem;
+  }
+  .availability::before {
+    content: '';
+    width: 8px; height: 8px;
+    background: #10B981;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    color: var(--navy);
+    line-height: 1.05;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+  .hero-tagline {
+    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+    color: var(--cyan-dark);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  .hero-pitch {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 680px;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+  .hero-pitch strong { color: var(--navy); font-weight: 600; }
+  .hero-meta {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 0.4rem; }
+  .hero-meta .dot { color: var(--cyan-dark); }
+  .hero-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--navy);
+    color: var(--white);
+    padding: 0.85rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-size: 0.95rem;
+  }
+  .btn-primary:hover { background: var(--cyan-dark); transform: translateY(-1px); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: transparent;
+    color: var(--navy);
+    border: 1px solid var(--border);
+    padding: 0.85rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-size: 0.95rem;
+  }
+  .btn-secondary:hover { border-color: var(--navy); }
+
+  /* METRICS BAR */
+  .metrics {
+    background: var(--navy);
+    padding: 3rem;
+  }
+  .metrics-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+  .metric-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.5rem;
+    color: var(--cyan);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .metric-label {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.4;
+  }
+
+  /* SECTIONS */
+  section { padding: 5rem 3rem; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cyan-dark);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    color: var(--navy);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+  .section-sub {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 620px;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+
+  /* EXPERIENCE TIMELINE */
+  .exp { background: var(--ice); }
+  .exp-list { display: flex; flex-direction: column; gap: 1.25rem; }
+  .exp-item {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 1.75rem 2rem;
+    border-left: 3px solid var(--cyan);
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .exp-item:hover { box-shadow: 0 8px 28px rgba(15,30,50,0.08); transform: translateY(-1px); }
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+  .exp-role {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem;
+    color: var(--navy);
+    display: inline-flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .role-tag {
+    display: inline-block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cyan-dark);
+    background: rgba(34,211,238,0.1);
+    border: 1px solid rgba(34,211,238,0.3);
+    padding: 0.25rem 0.65rem;
+    border-radius: 100px;
+    vertical-align: middle;
+    position: relative;
+    top: -2px;
+  }
+  .exp-dates {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .exp-company {
+    font-size: 0.95rem;
+    color: var(--cyan-dark);
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .exp-bullets li {
+    font-size: 0.92rem;
+    color: var(--text);
+    line-height: 1.6;
+    padding-left: 1.25rem;
+    position: relative;
+  }
+  .exp-bullets li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--cyan-dark);
+  }
+  .exp-bullets strong { color: var(--navy); font-weight: 600; }
+
+  .exp-item.earlier {
+    border-left-color: var(--muted);
+    opacity: 0.92;
+  }
+  .exp-item.earlier .exp-role {
+    font-size: 1.1rem;
+    color: var(--navy-light);
+  }
+  .exp-earlier-summary {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* CAPABILITIES */
+  .cap { background: var(--white); }
+  .cap-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+  .cap-card {
+    background: var(--ice);
+    border-radius: 12px;
+    padding: 1.75rem;
+    transition: all 0.2s;
+  }
+  .cap-card:hover { background: var(--white); box-shadow: 0 4px 20px rgba(15,30,50,0.06); }
+  .cap-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--navy);
+    margin-bottom: 0.85rem;
+  }
+  .cap-card .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .cap-card .tag {
+    font-size: 0.78rem;
+    color: var(--text);
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 0.28rem 0.7rem;
+    border-radius: 100px;
+  }
+
+  /* TESTIMONIALS */
+  .testim { background: var(--white); border-top: 1px solid var(--border); }
+  .testim-link {
+    color: var(--cyan-dark);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,150,183,0.3);
+    transition: border-color 0.2s;
+  }
+  .testim-link:hover { border-bottom-color: var(--cyan-dark); }
+  .testim-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  .testim-card {
+    background: var(--ice);
+    border-radius: 12px;
+    padding: 2rem 1.75rem 1.75rem;
+    position: relative;
+    transition: box-shadow 0.2s, transform 0.2s;
+    display: flex;
+    flex-direction: column;
+  }
+  .testim-card:hover {
+    box-shadow: 0 8px 28px rgba(15,30,50,0.08);
+    transform: translateY(-2px);
+  }
+  .testim-mark {
+    position: absolute;
+    top: 0.25rem;
+    left: 1.5rem;
+    font-family: 'DM Serif Display', serif;
+    font-size: 4.5rem;
+    color: var(--cyan);
+    line-height: 1;
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  .testim-card blockquote {
+    font-size: 0.95rem;
+    color: var(--text);
+    line-height: 1.65;
+    margin: 0 0 1.5rem 0;
+    position: relative;
+    flex-grow: 1;
+  }
+  .testim-card figcaption {
+    border-top: 1px solid rgba(15,30,50,0.08);
+    padding-top: 1rem;
+  }
+  .testim-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem;
+    color: var(--navy);
+    margin-bottom: 0.2rem;
+  }
+  .testim-title {
+    font-size: 0.82rem;
+    color: var(--cyan-dark);
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+  .testim-rel {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* PHILOSOPHY (compressed) */
+  .phil {
+    background: var(--navy);
+    color: var(--white);
+  }
+  .phil .section-title { color: var(--white); }
+  .phil .section-sub { color: rgba(255,255,255,0.7); }
+  .phil-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-top: 1rem;
+  }
+  .phil-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(34,211,238,0.15);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: border-color 0.2s;
+  }
+  .phil-card:hover { border-color: rgba(34,211,238,0.4); }
+  .phil-card .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--cyan);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.1em;
+  }
+  .phil-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+  .phil-card p {
+    font-size: 0.87rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+  }
+
+  /* CERTS */
+  .certs { background: var(--ice); padding: 3.5rem 3rem; }
+  .certs-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .certs-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .cert-pills {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .cert-pill {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 0.5rem 1rem;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    color: var(--navy);
+    font-weight: 500;
+  }
+  .cert-pill.new {
+    background: rgba(245,158,11,0.1);
+    border-color: rgba(245,158,11,0.3);
+    color: #B45309;
+  }
+
+  /* CONTACT */
+  .contact {
+    background: var(--navy-deep);
+    text-align: center;
+    padding: 6rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(34,211,238,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(34,211,238,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .contact-inner { position: relative; max-width: 700px; margin: 0 auto; }
+  .contact h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    color: var(--white);
+    margin-bottom: 1rem;
+    line-height: 1.15;
+  }
+  .contact h2 em { color: var(--cyan); font-style: italic; }
+  .contact p {
+    color: rgba(255,255,255,0.65);
+    font-size: 1.05rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+  }
+  .contact-buttons {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-contact-primary {
+    background: var(--cyan);
+    color: var(--navy);
+    padding: 0.95rem 1.75rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 0 30px rgba(34,211,238,0.3);
+    transition: transform 0.2s;
+  }
+  .btn-contact-primary:hover { transform: translateY(-2px); }
+  .btn-contact-ghost {
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.85);
+    padding: 0.95rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-contact-ghost:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  /* FOOTER */
+  footer {
+    background: #0A1929;
+    padding: 2rem 3rem;
+    border-top: 1px solid rgba(34,211,238,0.1);
+    text-align: center;
+  }
+  footer p {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.3);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links li:not(:last-child) { display: none; }
+    section, .hero, .metrics, .contact, .certs { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .hero { padding-top: 7rem; padding-bottom: 3rem; }
+    .metrics-inner { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .cap-grid, .phil-grid, .testim-grid { grid-template-columns: 1fr; }
+    .exp-header { flex-direction: column; align-items: flex-start; }
+  }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <a href="/" class="nav-logo">
-    <div class="nav-logo-mark">FM</div>
-    <span class="nav-logo-text">Foresight<span>Mint</span></span>
-  </a>
+  <a href="#" class="nav-logo">Stephen <span>Yuhas</span></a>
   <ul class="nav-links">
-    <li><a href="#products">Products</a></li>
-    <li><a href="riskradar.html">Risk Radar</a></li>
-    <li><a href="demo.html">Live Demo</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="https://foresightmint.gumroad.com/l/zccou" class="nav-cta" target="_blank">Buy $49 →</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#capabilities">Capabilities</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#approach">Approach</a></li>
+    <li><a href="#contact" class="nav-cta">Get in touch</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-grid-bg"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-glow-2"></div>
-
-  <div class="hero-content">
-    <div class="hero-badge">Now live — Risk Radar V1</div>
-    <h1 class="hero-headline">
-      What your status reports<br><em>aren't telling you.</em>
-    </h1>
-    <p class="hero-sub">
-      30 years of enterprise program leadership condensed into a Power BI dashboard that automatically detects when reported status isn't supported by data.
+  <div class="hero-inner">
+    <div class="availability">Open to new roles · FTE or contract</div>
+    <h1 class="hero-name">Stephen Yuhas</h1>
+    <div class="hero-tagline">Program Management · PMO Leadership · Business Transformation</div>
+    <p class="hero-pitch">
+      I build the <strong>operating models, governance, and portfolio systems</strong> that turn reactive, fragmented organizations into predictable, scalable delivery engines. 30+ years at Fortune 50 scale — T-Mobile, AT&amp;T — turning chaos into flow.
     </p>
-    <div class="hero-actions">
-      <a href="https://foresightmint.gumroad.com/l/zccou" class="btn-primary" target="_blank">
-        Get Risk Radar — $49 →
-      </a>
-      <a href="demo.html" class="btn-ghost">
-        ▶ See the live demo
-      </a>
+    <div class="hero-meta">
+      <span><span class="dot">◆</span> Lynnwood, WA</span>
+      <span><span class="dot">◆</span> Open to remote &amp; hybrid</span>
+      <span><span class="dot">◆</span> FTE or contract engagements</span>
     </div>
-  </div>
-
-  <div class="hero-right">
-    <div class="hero-stats">
-      <div class="stat-card">
-        <div class="stat-label">Program Health</div>
-        <div class="stat-value">2 of 3</div>
-        <div class="stat-meta">projects reporting accurate status</div>
-        <div class="stat-badge">⚠ 1 UNSUPPORTED</div>
-      </div>
-      <div class="stat-card amber">
-        <div class="stat-label">Risk Score — Green Widgets</div>
-        <div class="stat-value">38</div>
-        <div class="stat-meta">Reported Green · Computed Red</div>
-        <div class="stat-badge">UNSUPPORTED</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Blue Widgets</div>
-        <div class="stat-value">Score 1</div>
-        <div class="stat-meta">Reported Green · Computed Green</div>
-        <div class="stat-badge green">✓ VALIDATED</div>
-      </div>
+    <div class="hero-cta">
+      <a href="mailto:stephen@foresightmint.com" class="btn-primary">Email me →</a>
+      <a href="https://www.linkedin.com/in/stephen-yuhas-6923614/" class="btn-secondary" target="_blank">LinkedIn ↗</a>
+      <a href="#experience" class="btn-secondary">See experience</a>
     </div>
   </div>
 </section>
 
-<!-- PROBLEM -->
-<section class="problem" id="problem">
-  <div class="section-label">The Problem</div>
-  <h2 class="section-headline">Your PMO is flying blind<br>and doesn't know it.</h2>
-
-  <div class="problem-grid">
-    <div class="problem-list">
-      <div class="problem-item">
-        <div class="problem-icon">🔴</div>
-        <div>
-          <h3>Status reports are opinions, not facts</h3>
-          <p>PMs report Green because they believe the project is fine — not because the data says so. Capacity pressure and optimism bias do the rest.</p>
-        </div>
-      </div>
-      <div class="problem-item">
-        <div class="problem-icon">⚠️</div>
-        <div>
-          <h3>By the time Red shows up, it's too late</h3>
-          <p>Leadership finds out at the 11th hour. Mitigation is reactive, expensive, and political. The signals were there weeks ago.</p>
-        </div>
-      </div>
-      <div class="problem-item">
-        <div class="problem-icon">📊</div>
-        <div>
-          <h3>The data exists — it's just not connected</h3>
-          <p>Schedule variance, cost performance, invoice aging, stale risks — all in spreadsheets nobody reads together. Risk Radar connects them automatically.</p>
-        </div>
-      </div>
-      <div class="problem-item">
-        <div class="problem-icon">🧠</div>
-        <div>
-          <h3>Pattern recognition at scale is impossible manually</h3>
-          <p>At 3 projects you have a dashboard. At 50 projects you have an early warning system — or you have chaos.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="problem-quote">
-      <div class="audience-tag">Senior Leaders</div>
-      <blockquote>
-        "If a project reports Green and the data says Red, that is a <em>management risk</em> — not a project risk."
-      </blockquote>
-      <cite>— Pattern observed across 30 years of enterprise program leadership</cite>
-
-      <hr style="border:none; border-top:1px solid rgba(255,255,255,0.1); margin: 2rem 0;">
-
-      <div class="audience-tag" style="background:rgba(245,158,11,0.15); color:var(--amber); border-color:rgba(245,158,11,0.3);">Program Managers</div>
-      <blockquote style="font-size:1.2rem;">
-        "Data-driven PMs don't get replaced."
-      </blockquote>
-      <cite>— The career case for embracing accountability</cite>
-    </div>
-  </div>
-</section>
-
-<!-- PRODUCTS -->
-<section class="products" id="products">
-  <div class="products-header">
-    <div class="section-label">Products</div>
-    <h2 class="section-headline">Intelligence built for<br>the real enterprise.</h2>
-  </div>
-
-  <div class="product-card">
-    <div class="product-info">
-      <div class="product-tag">◆ First Product · Live Now</div>
-      <h2 class="product-name">Risk Radar<br><span>Power BI Starter Pack</span></h2>
-      <p class="product-desc">
-        A pre-built Power BI report and documented Excel data model that automatically detects when reported project status isn't supported by data. Setup in 30 minutes. No subscription.
-      </p>
-
-      <div class="product-features">
-        <div class="feature-item"><span class="feature-check">◆</span> Executive Summary + Signal Detail pages</div>
-        <div class="feature-item"><span class="feature-check">◆</span> 21 risk signals across schedule, cost, invoices, risks</div>
-        <div class="feature-item"><span class="feature-check">◆</span> Automatic Status Mismatch detection</div>
-        <div class="feature-item"><span class="feature-check">◆</span> Plain-English executive narratives</div>
-        <div class="feature-item"><span class="feature-check">◆</span> Prioritized action plan per project</div>
-        <div class="feature-item"><span class="feature-check">◆</span> Fully documented Excel MVD + Getting Started guide</div>
-      </div>
-
-      <div class="product-price">
-        <span class="price-current">$49</span>
-        <span class="price-regular">$99</span>
-        <span class="price-label">Launch price</span>
-      </div>
-
-      <div class="product-actions">
-        <a href="https://foresightmint.gumroad.com/l/zccou" class="btn-buy" target="_blank">Buy Now →</a>
-        <a href="riskradar.html" class="btn-demo">Learn More</a>
-        <a href="demo.html" class="btn-demo">▶ Live Demo</a>
-      </div>
-    </div>
-
-    <div class="product-visual">
-      <div class="mini-dashboard">
-        <div class="mini-dashboard-header">EZ Widgets Program — Project Status</div>
-        <div class="mini-project-row">
-          <span class="mini-project-name">Blue Widgets</span>
-          <div class="mini-ryg">
-            <div class="ryg-dot" style="background:#10B981"></div>
-            <span class="ryg-label" style="color:#10B981">VALIDATED</span>
-          </div>
-        </div>
-        <div class="mini-project-row">
-          <span class="mini-project-name">Red Widgets</span>
-          <div class="mini-ryg">
-            <div class="ryg-dot" style="background:#EF4444"></div>
-            <span class="ryg-label" style="color:#EF4444">UNSUPPORTED</span>
-          </div>
-        </div>
-        <div class="mini-project-row">
-          <span class="mini-project-name">Green Widgets</span>
-          <div class="mini-ryg">
-            <div class="ryg-dot" style="background:#EF4444"></div>
-            <span class="ryg-label" style="color:#EF4444">UNSUPPORTED</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="signal-bar">
-        <div class="signal-bar-label">⚠ Active Signals — Green Widgets</div>
-        <div class="signal-item">
-          <span class="signal-name">EV CPI L3</span>
-          <span class="signal-score">+6</span>
-        </div>
-        <div class="signal-item">
-          <span class="signal-name">Project Complete L2</span>
-          <span class="signal-score">+5</span>
-        </div>
-        <div class="signal-item">
-          <span class="signal-name">Work Complete L2</span>
-          <span class="signal-score">+4</span>
-        </div>
-        <div class="signal-item">
-          <span class="signal-name">Risk vs Status L2</span>
-          <span class="signal-score">+5</span>
-        </div>
-        <div class="signal-item" style="border-top:1px solid rgba(255,255,255,0.06); padding-top:0.5rem; margin-top:0.25rem;">
-          <span class="signal-name" style="color:rgba(255,255,255,0.4);">+ 7 more signals</span>
-          <span class="signal-score" style="color:var(--red);">38 total</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PM SECTION -->
-<section class="pm-section">
-  <div class="pm-grid">
-    <div class="pm-visual">
-      <div class="score-meter">
-        <div class="score-number">38</div>
-        <div class="score-label">Risk Score</div>
-        <div class="score-status">● COMPUTED RED</div>
-      </div>
-      <div class="signal-pills">
-        <div class="signal-pill">Schedule Lag</div>
-        <div class="signal-pill">CPI &lt; 0.65</div>
-        <div class="signal-pill">SPI &lt; 0.65</div>
-        <div class="signal-pill">Stale Risks</div>
-        <div class="signal-pill">No Mitigation</div>
-        <div class="signal-pill">Invoice Overdue</div>
-        <div class="signal-pill">Status Gap</div>
-        <div class="signal-pill">Work Lag</div>
-        <div class="signal-pill">Feature Lag</div>
-        <div class="signal-pill">Past Resolution</div>
-        <div class="signal-pill">Risk vs Status</div>
-      </div>
-    </div>
-
-    <div class="pm-content">
-      <div class="pm-tagline">For Program Managers</div>
-      <h2 class="pm-headline">Know what's coming before your stakeholders do.</h2>
-      <p class="pm-text">
-        You're doing your best with limited time. Risk Radar gives you actionable insights now — not during the post-mortem.
-      </p>
-      <p class="pm-text">
-        21 automated signals across schedule, cost, invoices, and risk register — scored and prioritized so you know exactly where to focus.
-      </p>
-      <div class="pm-points">
-        <div class="pm-point"><span class="pm-point-icon">◆</span> Detect status mismatches before leadership meetings</div>
-        <div class="pm-point"><span class="pm-point-icon">◆</span> Plain-English action plans — IMMEDIATE, URGENT, ESCALATE</div>
-        <div class="pm-point"><span class="pm-point-icon">◆</span> Setup in 30 minutes using your existing Excel data</div>
-        <div class="pm-point"><span class="pm-point-icon">◆</span> One-time purchase — no subscription, no lock-in</div>
-      </div>
-      <a href="https://foresightmint.gumroad.com/l/zccou" class="btn-primary" style="display:inline-flex;" target="_blank">Get Risk Radar — $49 →</a>
-    </div>
-  </div>
-</section>
-
-<!-- TRUST -->
-<section class="trust">
-  <h2 class="trust-headline">Transparency and Trust<br>are not <em>features.</em></h2>
-  <p class="trust-sub">They are the foundation. Everyone sees the same data. The numbers don't have a political agenda.</p>
-
-  <div class="trust-pillars">
-    <div class="trust-pillar">
-      <div class="pillar-icon">🔍</div>
-      <div class="pillar-title">Radical Transparency</div>
-      <p class="pillar-text">Every signal is visible. Every score is traceable. Senior leaders and PMs see the same dashboard — no filtered reality.</p>
-    </div>
-    <div class="trust-pillar">
-      <div class="pillar-icon">⚖️</div>
-      <div class="pillar-title">Accountability by Clarity</div>
-      <p class="pillar-text">Risk Radar facilitates accountability by creating clarity. When you know exactly what needs to be done, holding yourself accountable becomes the natural next step.</p>
-    </div>
-    <div class="trust-pillar">
-      <div class="pillar-icon">🛡️</div>
-      <div class="pillar-title">The Problem is Capacity</div>
-      <p class="pillar-text">Not people. PMs aren't hiding problems — they're overwhelmed. Risk Radar removes the guesswork and gives everyone a shared, unambiguous picture.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="about-grid">
+<!-- METRICS -->
+<div class="metrics">
+  <div class="metrics-inner">
     <div>
-      <div class="section-label">About</div>
-      <h2 class="section-headline">30 years of<br>pattern recognition.</h2>
-      <p class="about-text">
-        ForesightMint was built by someone who has spent 30 years inside large enterprises watching the same failure modes repeat. Projects report Green until they don't. Leaders find out late. PMs get blamed for things that were predictable.
-      </p>
-      <p class="about-text">
-        Risk Radar is the tool that should have existed a decade ago. Pre-built, documented, deployable in 30 minutes, priced for the individual PM — not the enterprise budget cycle.
-      </p>
-      <p class="about-text">
-        V1 is the intelligence. This is just the first.
-      </p>
-      <div class="about-signature">Stephen Yuhas</div>
-      <div class="about-title">Founder, ForesightMint · Senior Technical Program Manager</div>
+      <div class="metric-num">$6M</div>
+      <div class="metric-label">Funding secured for enterprise iGRC transformation</div>
     </div>
+    <div>
+      <div class="metric-num">75%</div>
+      <div class="metric-label">Increase in delivery velocity across $20M portfolio</div>
+    </div>
+    <div>
+      <div class="metric-num">3,000</div>
+      <div class="metric-label">Person org supported via enterprise PMO buildout</div>
+    </div>
+    <div>
+      <div class="metric-num">30+</div>
+      <div class="metric-label">Years driving transformation at Fortune 50 scale</div>
+    </div>
+  </div>
+</div>
 
-    <div class="about-card">
-      <div class="about-card-header">Background & Credentials</div>
-      <div class="credential">
-        <span class="cred-icon">◆</span>
-        <div>
-          <div class="cred-label">Experience</div>
-          <div class="cred-value">30 years enterprise program leadership</div>
+<!-- EXPERIENCE -->
+<section class="exp" id="experience">
+  <div class="section-inner">
+    <div class="section-label">Professional Experience</div>
+    <h2 class="section-title">Enterprise program leadership,<br>end to end.</h2>
+    <p class="section-sub">Two decades inside the largest telecom delivery organizations in North America — building the governance, portfolio, and execution systems they now run on.</p>
+
+    <div class="exp-list">
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-role">Principal Product Manager, Technical — iGRC <span class="role-tag">Program Leadership role</span></div>
+          <div class="exp-dates">Jan 2024 – Nov 2025</div>
+        </div>
+        <div class="exp-company">T-Mobile · Bellevue, WA</div>
+        <ul class="exp-bullets">
+          <li>Led enterprise transformation consolidating <strong>20+ governance, risk, and compliance functions</strong> under a unified operating model; secured <strong>$6M</strong> to fund execution</li>
+          <li>Directed cross-functional delivery across product, engineering, data, and business teams</li>
+          <li>Redesigned fragmented operating models into a single scalable execution framework — improving consistency, data integrity, and cross-functional accountability</li>
+          <li>Built real-time dashboards and automated risk indicators, replacing manual reporting and accelerating decision-making</li>
+          <li>Implemented centralized intake and prioritization, increasing transparency and execution alignment</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-role">Senior Product Manager, Technical — Technology Risk &amp; Compliance <span class="role-tag">Program Leadership role</span></div>
+          <div class="exp-dates">Jan 2023 – Jan 2024</div>
+        </div>
+        <div class="exp-company">T-Mobile</div>
+        <ul class="exp-bullets">
+          <li>Automated compliance workflows using Power Platform and BI tools, reducing manual effort and improving audit readiness</li>
+          <li>Built scalable tracking systems for remediation, controls, and execution performance</li>
+          <li>Enabled adoption of standardized, data-driven processes across teams</li>
+          <li><strong>Promoted</strong> based on sustained delivery impact</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-role">Senior Product Manager, Technical — Contact Center Technologies <span class="role-tag">Program Leadership role</span></div>
+          <div class="exp-dates">Jul 2019 – Jan 2023</div>
+        </div>
+        <div class="exp-company">T-Mobile</div>
+        <ul class="exp-bullets">
+          <li>Transformed <strong>$20M portfolio</strong> spanning 150+ initiatives and 120+ contributors from reactive delivery into predictable, flow-based execution</li>
+          <li>Increased delivery velocity by <strong>75%</strong> and reduced time-to-value by <strong>38%</strong></li>
+          <li>Directed large-scale modernization (Avaya → Cisco) across enterprise contact center platforms</li>
+          <li>Built integrated portfolio intelligence system (Jira + Power BI + Power Platform)</li>
+          <li>Strengthened cross-functional execution across engineering, product, and operations</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-role">Agile Coach / Program Manager (via Slalom)</div>
+          <div class="exp-dates">Mar 2019 – Jul 2019</div>
+        </div>
+        <div class="exp-company">T-Mobile</div>
+        <ul class="exp-bullets">
+          <li>Transformed a reactive, high-pressure organization into a predictable, flow-based operating model</li>
+          <li>Implemented capacity planning, delivery metrics, and real-time reporting systems</li>
+          <li>Introduced early risk indicators, enabling proactive issue management</li>
+          <li><strong>Engagement led to full-time leadership role</strong></li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-role">Various Program &amp; Transformation Roles</div>
+          <div class="exp-dates">Mar 2005 – Nov 2018</div>
+        </div>
+        <div class="exp-company">AT&amp;T</div>
+        <ul class="exp-bullets">
+          <li>Led enterprise program transformation across <strong>3,000-person organization</strong> delivering 8K–10K initiatives annually</li>
+          <li>Led post-merger integrations for <strong>Cingular and DirecTV</strong> acquisitions, aligning operating models and delivery frameworks across merging organizations</li>
+          <li>Built enterprise PMO and governance functions, establishing standardized operating models, delivery frameworks, and portfolio reporting</li>
+          <li>Built reporting and execution systems improving transparency and performance management</li>
+          <li>Managed teams and partnered directly with senior leadership on execution strategy</li>
+          <li>Awarded <strong>CIO recognition</strong> for enterprise Agile transformation impact</li>
+        </ul>
+      </div>
+
+      <div class="exp-item earlier">
+        <div class="exp-header">
+          <div class="exp-role">Earlier Career — Program Management, QA &amp; Analyst Roles</div>
+          <div class="exp-dates">1997 – 2005</div>
+        </div>
+        <div class="exp-company">IDX / GE Healthcare · Premera Blue Cross · Phycom · CHIS · Health Systems Technologies</div>
+        <p class="exp-earlier-summary">
+          Program Manager (contract, IDX/GE Healthcare) · System Analyst (Premera Blue Cross) · QA Manager (Phycom) · Corporate Trainer &amp; Business Analyst (Health Systems Technologies). Foundation in healthcare &amp; insurance systems, SDLC methodology, and process reengineering that became the backbone of later enterprise transformation work.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section class="cap" id="capabilities">
+  <div class="section-inner">
+    <div class="section-label">Core Capabilities</div>
+    <h2 class="section-title">What I bring<br>to the role.</h2>
+    <p class="section-sub">Methodology-agnostic. Outcome-obsessed. I've led with Waterfall, SAFe, Scrum, Kanban — and built hybrid operating models when none of them fit alone.</p>
+
+    <div class="cap-grid">
+      <div class="cap-card">
+        <h3>Transformation &amp; Operational Excellence</h3>
+        <div class="tags">
+          <span class="tag">Operating Model Design</span>
+          <span class="tag">Process Reengineering</span>
+          <span class="tag">Organizational Change</span>
+          <span class="tag">Post-Merger Integration</span>
+          <span class="tag">Portfolio Rationalization</span>
+          <span class="tag">Governance &amp; Cadence</span>
         </div>
       </div>
-      <div class="credential">
-        <span class="cred-icon">◆</span>
-        <div>
-          <div class="cred-label">Role</div>
-          <div class="cred-value">Senior Technical Program Manager</div>
+      <div class="cap-card">
+        <h3>Program, Portfolio &amp; PMO</h3>
+        <div class="tags">
+          <span class="tag">Enterprise Program Mgmt</span>
+          <span class="tag">PMO Design &amp; Build-Out</span>
+          <span class="tag">Intake &amp; Prioritization</span>
+          <span class="tag">Executive Reporting</span>
+          <span class="tag">Risk &amp; Dependency Mgmt</span>
+          <span class="tag">Capacity Planning</span>
+          <span class="tag">KPI / OKR Frameworks</span>
         </div>
       </div>
-      <div class="credential">
-        <span class="cred-icon">◆</span>
-        <div>
-          <div class="cred-label">Launched</div>
-          <div class="cred-value">April 2026 — ForesightMint V1 live</div>
+      <div class="cap-card">
+        <h3>Data, Automation &amp; AI</h3>
+        <div class="tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">Power Platform</span>
+          <span class="tag">GPT Integration</span>
+          <span class="tag">Operational Analytics</span>
+          <span class="tag">Executive Dashboards</span>
         </div>
       </div>
-      <div class="credential">
-        <span class="cred-icon">◆</span>
-        <div>
-          <div class="cred-label">Contact</div>
-          <div class="cred-value">stephen@foresightmint.com</div>
-        </div>
-      </div>
-      <div class="credential">
-        <span class="cred-icon">◆</span>
-        <div>
-          <div class="cred-label">GitHub</div>
-          <div class="cred-value">github.com/foresightmint</div>
+      <div class="cap-card">
+        <h3>Leadership</h3>
+        <div class="tags">
+          <span class="tag">Executive Communication</span>
+          <span class="tag">Stakeholder Influence</span>
+          <span class="tag">Team Leadership</span>
+          <span class="tag">Organizational Change</span>
+          <span class="tag">Player-Coach Model</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PRICING BANNER -->
-<section class="pricing-banner">
-  <div class="pricing-banner-content">
-    <h2>One-time purchase.<br>No subscription.</h2>
-    <p>Everything you need to get started in 30 minutes, priced for the individual PM.</p>
-    <div class="pricing-display">
-      <span class="pricing-main">$49</span>
-      <span class="pricing-regular">$99</span>
+<!-- TESTIMONIALS -->
+<section class="testim" id="testimonials">
+  <div class="section-inner">
+    <div class="section-label">What colleagues say</div>
+    <h2 class="section-title">From the people<br>I've worked with.</h2>
+    <p class="section-sub">Pulled from LinkedIn recommendations — full originals and more at my <a href="https://www.linkedin.com/in/stephen-yuhas-6923614/details/recommendations/" target="_blank" class="testim-link">profile</a>.</p>
+
+    <div class="testim-grid">
+      <figure class="testim-card">
+        <div class="testim-mark">"</div>
+        <blockquote>Give him something undefined or messy and he'll calmly start asking the right questions, connecting the dots, and building structure where there wasn't any. It never felt chaotic when he was involved. Any team would be lucky to have him.</blockquote>
+        <figcaption>
+          <div class="testim-name">Amy N.</div>
+          <div class="testim-title">Director, Integrated Governance Risk &amp; Compliance · at T-Mobile</div>
+          <div class="testim-rel">Former Manager</div>
+        </figcaption>
+      </figure>
+
+      <figure class="testim-card">
+        <div class="testim-mark">"</div>
+        <blockquote>Steve was integral in bringing order to chaos for our claim intake center. Our pending dropped substantially thanks to his understanding of the problem and how to engineer systems and processes to improve our performance.</blockquote>
+        <figcaption>
+          <div class="testim-name">Beth D.</div>
+          <div class="testim-title">Senior Manager · at Premera</div>
+          <div class="testim-rel">Former Manager</div>
+        </figcaption>
+      </figure>
+
+      <figure class="testim-card">
+        <div class="testim-mark">"</div>
+        <blockquote>Steve focuses on delivering solutions that are practical, repeatable, and most importantly result in cost savings. His ability to lead a team through constant change and deliver solid results — but still focus on serving the customer's needs — is very rare.</blockquote>
+        <figcaption>
+          <div class="testim-name">Phyllis C., PMP</div>
+          <div class="testim-title">Program &amp; Project Management · at AT&amp;T / Cingular</div>
+          <div class="testim-rel">Internal Customer / Former Colleague</div>
+        </figcaption>
+      </figure>
     </div>
-    <div class="pricing-note">Launch price · <strong>Limited time</strong> · One-time fee</div>
-    <a href="https://foresightmint.gumroad.com/l/zccou" class="btn-primary" style="font-size:1.1rem; padding:1rem 2.5rem;" target="_blank">
-      Get Risk Radar Now →
-    </a>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- APPROACH (compressed philosophy) -->
+<section class="phil" id="approach">
+  <div class="section-inner">
+    <div class="section-label" style="color: var(--cyan);">My Approach</div>
+    <h2 class="section-title">Five imperatives<br>behind every engagement.</h2>
+    <p class="section-sub">Thirty years of pattern recognition compressed into a repeatable framework. This is how I walk in the door — and how I leave teams running in sustainable flow.</p>
+
+    <div class="phil-grid">
+      <div class="phil-card">
+        <div class="num">01 — Repeatability</div>
+        <h3>Process that captures the data without slowing doers down</h3>
+        <p>Start with a data model. Augment enterprise systems. Never put the overhead on the people doing the actual work.</p>
+      </div>
+      <div class="phil-card">
+        <div class="num">02 — Trust</div>
+        <h3>Transparency by making data available to everyone</h3>
+        <p>Broadcast the data. Don't hide dirty laundry. Vulnerability plus a plan to address it is the most powerful move a leader has.</p>
+      </div>
+      <div class="phil-card">
+        <div class="num">03 — Predictability</div>
+        <h3>Use the data to decide, predict, and improve</h3>
+        <p>Once people see and react to the data, using it becomes easy. What might happen? What can we do? What will we do if it does?</p>
+      </div>
+      <div class="phil-card">
+        <div class="num">04 — Voice</div>
+        <h3>Guided retrospection without hierarchy</h3>
+        <p>No titles. No politics. Pareto-driven. The three most powerful questions: Why? So what? What can we do?</p>
+      </div>
+      <div class="phil-card">
+        <div class="num">05 — Improvement</div>
+        <h3>Measure improvements; celebrate success and failure</h3>
+        <p>Do what you committed to. When something doesn't work, abandon it quickly, document the learning, and celebrate it. Failures are data.</p>
+      </div>
+      <div class="phil-card" style="background: rgba(34,211,238,0.08); border-color: rgba(34,211,238,0.3);">
+        <div class="num" style="color: var(--cyan);">◆ The Principle</div>
+        <h3>Agile is an adjective, not a noun.</h3>
+        <p style="color: rgba(255,255,255,0.75);">The win isn't agility — it's <em style="color:var(--cyan)">flow</em>. Process has to become repeatable and predictable. Methodology is just a mechanism for getting there.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTS STRIP -->
+<div class="certs">
+  <div class="certs-inner">
+    <div class="certs-label">◆ Certifications</div>
+    <div class="cert-pills">
+      <div class="cert-pill new">PMI-CPMAI · Mar 2026</div>
+      <div class="cert-pill">PMP</div>
+      <div class="cert-pill">Professional Scrum Master</div>
+      <div class="cert-pill">SAFe Practitioner</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <h2>Let's talk about <em>what you need built.</em></h2>
+    <p>I'm actively interviewing for Program Management and PMO leadership roles — FTE or contract. If you're scaling a delivery organization, standing up a PMO, or cleaning up a portfolio that's outgrown its operating model, I'd love to talk.</p>
+    <div class="contact-buttons">
+      <a href="mailto:stephen@foresightmint.com" class="btn-contact-primary">stephen@foresightmint.com</a>
+      <a href="https://www.linkedin.com/in/stephen-yuhas-6923614/" class="btn-contact-ghost" target="_blank">LinkedIn ↗</a>
+      <a href="tel:+14253450877" class="btn-contact-ghost">425-345-0877</a>
+    </div>
+  </div>
+</section>
+
 <footer>
-  <div class="footer-inner">
-    <div class="footer-brand">Foresight<span>Mint</span></div>
-    <ul class="footer-links">
-      <li><a href="riskradar.html">Risk Radar</a></li>
-      <li><a href="demo.html">Live Demo</a></li>
-      <li><a href="https://foresightmint.gumroad.com/l/zccou" target="_blank">Buy</a></li>
-      <li><a href="mailto:stephen@foresightmint.com">Contact</a></li>
-    </ul>
-    <div class="footer-copy">© 2026 ForesightMint · foresightmint.com</div>
-  </div>
+  <p>© 2026 Stephen Yuhas · Lynnwood, WA</p>
 </footer>
 
 </body>
