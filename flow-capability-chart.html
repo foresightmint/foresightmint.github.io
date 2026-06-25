@@ -20,24 +20,37 @@
     a { color: #0a7; }
     .meta { color: #888; font-size: 0.9rem; margin-top: 0.5rem; }
     .footer { margin-top: 4rem; color: #888; font-size: 0.9rem; }
+    .download-btn {
+      display: inline-block;
+      background: #0a7;
+      color: #fff;
+      padding: 0.7rem 1.4rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      margin: 0.5rem 0;
+    }
+    .download-btn:hover { background: #086; }
+    code {
+      background: #f4f4f4;
+      padding: 0.1rem 0.35rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
   </style>
 </head>
 <body>
   <h1>Flow Capability Chart</h1>
   <p class="tagline">A free Power BI custom visual by ForesightMint.</p>
-
   <h2>About</h2>
   <p>The Flow Capability Chart is a frequency distribution with a cumulative percentage overlay, paired with rich filtering. The bars show the shape of the work. The cumulative line shows where the long tail begins. The filters get the team from shape to cause in seconds. It is the visual companion to the methodology in <em>Building the Enterprise in Flow</em>, designed to drive guided retrospectives.</p>
-
   <p>Drop in a numeric fact and a unique row identifier. No DAX, no bin creation, no setup. Tinker from there.</p>
-
   <h2>Get the visual</h2>
-  <p>Flow Capability Chart is free on Microsoft AppSource. In Power BI, open the Visualizations pane, choose <strong>Get more visuals</strong>, and search for <em>Flow Capability Chart</em>.</p>
+  <p>Download the Flow Capability Chart, then import it into Power BI Desktop: open the Visualizations pane, click the <strong>&middot;&middot;&middot;</strong> (more options) menu, choose <strong>Import a visual from a file</strong>, and select the downloaded <code>.pbiviz</code> file.</p>
+  <p><a class="download-btn" href="/eZPareto.pbiviz" download>Download Flow Capability Chart (.pbiviz &middot; v1.1.0.0)</a></p>
   <p class="meta">Source available on <a href="https://github.com/foresightmint/PowerBI-Visuals">GitHub</a>.</p>
-
   <h2>Support</h2>
   <p>Questions, bug reports, or feature requests: <a href="mailto:stephen@foresightmint.com">stephen@foresightmint.com</a>.</p>
-
   <div class="footer">
     ForesightMint &middot; <a href="https://foresightmint.com">foresightmint.com</a> &middot; <a href="privacy.html">Privacy</a>
   </div>
