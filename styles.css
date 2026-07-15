@@ -932,15 +932,15 @@
   /* HERO WITH HEADSHOT */
   .hero-grid {
     display: grid;
-    grid-template-columns: 1fr 300px;
-    gap: 3.5rem;
+    grid-template-columns: 240px 1fr;
+    gap: 3rem;
     align-items: center;
   }
   .headshot-wrap { justify-self: center; }
   .headshot {
-    width: 100%;
-    max-width: 300px;
-    aspect-ratio: 1 / 1;
+    width: 240px;
+    height: 240px;
+    max-width: 100%;
     object-fit: cover;
     border-radius: 50%;
     display: block;
@@ -949,25 +949,9 @@
       0 0 0 2px var(--cyan),
       0 18px 40px rgba(15,30,50,0.16);
   }
-  .headshot-sm {
-    width: 92px;
-    height: 92px;
-    object-fit: cover;
-    border-radius: 50%;
-    display: block;
-    border: 3px solid var(--white);
-    box-shadow: 0 0 0 2px var(--cyan), 0 8px 20px rgba(15,30,50,0.14);
-    flex-shrink: 0;
-  }
-  .byline-row {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-    margin-bottom: 1.75rem;
-  }
 
   @media (max-width: 900px) {
-    .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .headshot-wrap { justify-self: flex-start; order: -1; }
-    .headshot { max-width: 160px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+    .headshot-wrap { justify-self: flex-start; }
+    .headshot { width: 150px; height: 150px; }
   }
