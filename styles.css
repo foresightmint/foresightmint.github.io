@@ -955,3 +955,25 @@
     .headshot-wrap { justify-self: flex-start; }
     .headshot { width: 150px; height: 150px; }
   }
+
+  /* PRODUCT SCREENSHOT */
+  .shot-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .shot {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 18px 50px rgba(15,30,50,0.14);
+  }
+  .shot-caption {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 1rem;
+  }
