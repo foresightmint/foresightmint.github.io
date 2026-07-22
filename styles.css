@@ -1032,3 +1032,23 @@
   @media (max-width: 700px) {
     .demo-wrap { aspect-ratio: 3 / 4; min-height: 520px; }
   }
+
+  /* Demo full-screen prompt */
+  .demo-tip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: rgba(34,211,238,0.1);
+    border: 1px solid rgba(34,211,238,0.35);
+    border-radius: 100px;
+    padding: 0.5rem 1.1rem;
+    font-size: 0.88rem;
+    color: var(--navy);
+    font-weight: 500;
+    margin-top: 1.25rem;
+  }
+  .demo-tip .icon {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    color: var(--cyan-dark);
+  }
