@@ -1130,3 +1130,18 @@
     .watch-band-inner { grid-template-columns: 1fr; gap: 1.5rem; }
     .watch-play { display: none; }
   }
+
+  /* ============================================
+     BOOK REVIEWS (Amazon)
+     ============================================ */
+  .reviews { background: var(--white); border-top: 1px solid var(--border); }
+  .reviews .testim-card { padding-top: 1.75rem; }
+  .review-stars {
+    color: #F5A623;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    line-height: 1;
+    margin-bottom: 0.9rem;
+  }
+  .review-stars span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .reviews .testim-rel { margin-top: 0.15rem; }
