@@ -49,7 +49,6 @@
           <a href="experience.html" class="btn-secondary">See experience</a>
           <a href="solutions.html" class="btn-secondary">Browse solutions</a>
         </div>
-        <a href="#signup" class="hero-freebie"><span class="tag">Free</span> Get the first 5 rules of the book by email →</a>
       </div>
     </div>
   </div>
@@ -84,27 +83,6 @@
         <div class="dest-go">Read more →</div>
       </a>
     </div>
-  </div>
-</section>
-
-<!-- EMAIL SIGNUP -->
-<section class="signup" id="signup">
-  <div class="signup-inner">
-    <div class="section-label">Free download</div>
-    <h2 class="section-title">Get the first 5 rules — free.</h2>
-    <p class="section-sub signup-sub-inline">
-      The opening five rules from <em>Building the Enterprise in Flow</em>, sent straight to your inbox — plus the occasional note on flow, delivery, and new videos. No spam, no fluff.
-    </p>
-
-    <!-- MailerLite: Flow List — First 5 Rules signup (account 2558794 / form 194998658300642772) -->
-    <form class="signup-form" data-ml-form action="https://assets.mailerlite.com/jsonp/2558794/forms/194998658300642772/subscribe" method="post" target="_blank">
-      <input type="email" name="fields[email]" placeholder="you@company.com" aria-label="Email address" required>
-      <input type="hidden" name="ml-submit" value="1">
-      <input type="hidden" name="anticsrf" value="true">
-      <button type="submit">Send me the rules →</button>
-    </form>
-    <p class="signup-fine">Unsubscribe anytime. Your email stays between us.</p>
-    <p class="signup-success" hidden>✓ Check your inbox — the first five rules are on the way.</p>
   </div>
 </section>
 
@@ -172,23 +150,6 @@
 <footer>
   <p>© 2026 Stephen Yuhas · Lynnwood, WA · <a href="privacy.html" style="color: rgba(255,255,255,0.4);">Privacy</a></p>
 </footer>
-
-<script>
-(function(){
-  document.querySelectorAll('form[data-ml-form]').forEach(function(form){
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-      var email = form.querySelector('input[type="email"]');
-      if(email && !email.checkValidity()){ email.reportValidity(); return; }
-      try { fetch(form.action, { method:'POST', body:new FormData(form), mode:'no-cors' }); } catch(err){}
-      var wrap = form.parentNode;
-      form.style.display = 'none';
-      var fine = wrap.querySelector('.signup-fine'); if(fine){ fine.style.display='none'; }
-      var ok = wrap.querySelector('.signup-success'); if(ok){ ok.hidden = false; }
-    });
-  });
-})();
-</script>
 
 </body>
 </html>
